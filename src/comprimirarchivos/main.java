@@ -8,6 +8,7 @@ package comprimirarchivos;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -116,7 +117,7 @@ public class main extends javax.swing.JFrame {
         if (respuesta == JFileChooser.APPROVE_OPTION)
         {
             //Crear un objeto File con el archivo elegido
-            File archivoElegido = fc.getSelectedFile();
+            archivoElegido = fc.getSelectedFile();
             //Mostrar el nombre del archvivo en el campo de texto
             txtDirection.setText(archivoElegido.getName());
         }
@@ -124,7 +125,7 @@ public class main extends javax.swing.JFrame {
 
     private void compressButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compressButtonActionPerformed
         // TODO add your handling code here:
-        
+        compress();
     }//GEN-LAST:event_compressButtonActionPerformed
 
     /**
@@ -170,9 +171,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton openFile;
     private javax.swing.JTextField txtDirection;
     // End of variables declaration//GEN-END:variables
+    private File archivoElegido;
     
-    
-    private static void compress(){
-        
+    private void compress(){
+        JOptionPane.showMessageDialog(this,"Seleccione Donde quiere guardarlo");
     }
 }
