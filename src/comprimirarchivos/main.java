@@ -6,6 +6,9 @@
 
 package comprimirarchivos;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Inspiron
@@ -29,8 +32,8 @@ public class main extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        openFile = new javax.swing.JButton();
+        txtDirection = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jButton3 = new javax.swing.JButton();
@@ -39,7 +42,12 @@ public class main extends javax.swing.JFrame {
 
         jLabel1.setText("Seleccione un Archivo:");
 
-        jButton1.setText("Open");
+        openFile.setText("Open");
+        openFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openFileActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Comprimir");
 
@@ -66,9 +74,9 @@ public class main extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(txtDirection)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
+                                .addComponent(openFile)))
                         .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
@@ -78,8 +86,8 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -91,6 +99,23 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
+        // Creando el objeto FIleChooser para seleccionar el archivo
+        JFileChooser fc = new JFileChooser();
+        
+        // Mostrar Ventana
+        
+        int respuesta = fc.showOpenDialog(this);
+   
+        if (respuesta == JFileChooser.APPROVE_OPTION)
+        {
+            //Crear un objeto File con el archivo elegido
+            File archivoElegido = fc.getSelectedFile();
+            //Mostrar el nombre del archvivo en el campo de texto
+            txtDirection.setText(archivoElegido.getName());
+        }
+    }//GEN-LAST:event_openFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,11 +153,11 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton openFile;
+    private javax.swing.JTextField txtDirection;
     // End of variables declaration//GEN-END:variables
 }
