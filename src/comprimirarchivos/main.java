@@ -34,7 +34,7 @@ public class main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         openFile = new javax.swing.JButton();
         txtDirection = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        compressButton = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jButton3 = new javax.swing.JButton();
 
@@ -49,7 +49,12 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Comprimir");
+        compressButton.setText("Comprimir");
+        compressButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compressButtonActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Descomprimir");
 
@@ -66,7 +71,7 @@ public class main extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jButton2)
+                        .addComponent(compressButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                         .addGap(65, 65, 65))
@@ -90,7 +95,7 @@ public class main extends javax.swing.JFrame {
                     .addComponent(openFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(compressButton)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,6 +121,11 @@ public class main extends javax.swing.JFrame {
             txtDirection.setText(archivoElegido.getName());
         }
     }//GEN-LAST:event_openFileActionPerformed
+
+    private void compressButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compressButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_compressButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +163,16 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton compressButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JButton openFile;
     private javax.swing.JTextField txtDirection;
     // End of variables declaration//GEN-END:variables
+    
+    
+    private static void compress(){
+        
+    }
 }
