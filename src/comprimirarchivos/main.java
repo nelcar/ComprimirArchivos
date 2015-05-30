@@ -184,7 +184,7 @@ public class main extends javax.swing.JFrame {
             reedFile();
         }
     }
-    
+
     private void reedFile() {
         File archivo = null;
         FileReader fr = null;
@@ -201,9 +201,10 @@ public class main extends javax.swing.JFrame {
             String contenido = "";
             while ((linea = br.readLine()) != null) {
                 System.out.println(linea);
-                contenido += linea;
-                System.out.println(contenido);
+                contenido += "\n" + linea;
             }
+            System.out.println(contenido);
+            caracterCount(contenido);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -217,8 +218,16 @@ public class main extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void caracterCount(String texto){
+
+    private void caracterCount(String texto) {
+        //dividir en caracteres el texto
+        char[] arrayChar = texto.toCharArray();
+        //arreglo cantidad de caracteres segun la tabla ascii
+        int [] count = new int [256];
         
+        //contar cuanto se repite
+        for (int i = 0; i < arrayChar.length; i++) {
+            count[arrayChar[i]]++;
+        }
     }
 }
