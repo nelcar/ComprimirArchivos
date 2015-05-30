@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package comprimirarchivos;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -109,17 +110,15 @@ public class main extends javax.swing.JFrame {
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
         // Creando el objeto FIleChooser para seleccionar el archivo
         JFileChooser fc = new JFileChooser();
-        
+        fc.setCurrentDirectory(new File("./Prueba de proyecto"));
         // Mostrar Ventana
-        
         int respuesta = fc.showOpenDialog(this);
-   
-        if (respuesta == JFileChooser.APPROVE_OPTION)
-        {
+
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
             //Crear un objeto File con el archivo elegido
             archivoElegido = fc.getSelectedFile();
             //Mostrar el nombre del archvivo en el campo de texto
-            txtDirection.setText(archivoElegido.getName());
+            txtDirection.setText(archivoElegido.getPath());
         }
     }//GEN-LAST:event_openFileActionPerformed
 
@@ -172,8 +171,54 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField txtDirection;
     // End of variables declaration//GEN-END:variables
     private File archivoElegido;
+
+    private void compress() {
+        JOptionPane.showMessageDialog(this, "Seleccione Donde quiere guardarlo");
+        // Creando el objeto FIleChooser para seleccionar el archivo
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File("./Prueba de proyecto"));
+        // Mostrar Ventana
+        int respuesta = fc.showSaveDialog(this);
+
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
+            reedFile();
+        }
+    }
     
-    private void compress(){
-        JOptionPane.showMessageDialog(this,"Seleccione Donde quiere guardarlo");
+    private void reedFile() {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // abrir archivo
+            archivo = new File(txtDirection.getText());
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            //leer el archivo
+            String linea;
+            String contenido = "";
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+                contenido += linea;
+                System.out.println(contenido);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //cerrar archivo
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private void caracterCount(String texto){
+        
     }
 }
