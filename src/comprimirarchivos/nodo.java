@@ -14,9 +14,9 @@ public class nodo {
     private char dato;
     private nodo siguiente;
 
-    public nodo(char dato, nodo siguiente) {
+    public nodo(char dato) {
         this.dato = dato;
-        this.siguiente = siguiente;
+        this.siguiente = null;
     }
 
     public char getDato() {
