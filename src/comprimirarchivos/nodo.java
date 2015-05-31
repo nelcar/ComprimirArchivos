@@ -12,21 +12,31 @@ package comprimirarchivos;
  */
 public class nodo {
     
-    private int dato;
+    private char dato;
+    private int frecuencia;
     private nodo izq, der;
 
-    public nodo(int dato, nodo izq, nodo der) {
+    public nodo(char dato, int frecuencia, nodo izq, nodo der) {
         this.dato = dato;
+        this.frecuencia = frecuencia;
         this.izq = izq;
         this.der = der;
     }
 
-    public int getDato() {
+    public char getDato() {
         return dato;
     }
 
-    public void setDato(int dato) {
+    public void setDato(char dato) {
         this.dato = dato;
+    }
+
+    public int getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(int frecuencia) {
+        this.frecuencia = frecuencia;
     }
 
     public nodo getIzq() {
