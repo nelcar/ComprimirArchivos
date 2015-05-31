@@ -22,7 +22,16 @@ public class nodo {
         this.izq = izq;
         this.der = der;
     }
-
+    private boolean isLeath(){
+        //assert para que se ignore el error
+        assert (izq == null && der == null) || (izq != null && der != null);
+        return (izq == null && der == null);
+    }
+    
+    public int compareTo(nodo algo) {
+        return this.frecuencia - algo.frecuencia;
+    }
+    
     public char getDato() {
         return dato;
     }
