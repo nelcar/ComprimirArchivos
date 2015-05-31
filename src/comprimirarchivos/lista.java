@@ -12,4 +12,17 @@ package comprimirarchivos;
  */
 public class lista {
     private nodo inicio;
+
+    public lista(nodo inicio) {
+        this.inicio = inicio;
+    }
+
+    public nodo getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(nodo inicio) {
+        this.inicio = inicio;
+    }
+    
 }
