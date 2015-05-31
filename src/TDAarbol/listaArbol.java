@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package comprimirarchivos;
+package TDAarbol;
+
+import TDAarbol.arbol;
+import TDAlist.lista;
+import TDAtabla.listaTabla;
 
 /**
  *
@@ -85,4 +89,16 @@ public class listaArbol {
         aux.setSiguiente(null);
         return aux.getTree().getRaiz();
     }
+
+    public listaTabla obtenerHojas(String ubicacion, listaTabla tabla, nodoArbol raiz) {
+        if (raiz.getDato() == null) {
+            tabla = obtenerHojas(ubicacion + "0", tabla, raiz.getIzq());
+            tabla = obtenerHojas(ubicacion + "1", tabla, raiz.getDer());
+        } else {
+            tabla.agregar(raiz.getDato(), ubicacion);
+        }
+        return tabla;
+    }
+    
+    
 }
