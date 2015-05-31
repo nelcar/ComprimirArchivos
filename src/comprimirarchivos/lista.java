@@ -10,9 +10,6 @@ package comprimirarchivos;
  *
  * @author Nelson Cardenas
  */
-public class comprNelCar {
-    
-    private static String [] comprimir(String contenido){
-        return null;
-    }
+public class lista {
+    private nodo inicio;
 }
