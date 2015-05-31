@@ -16,6 +16,16 @@ public class comprNelCar {
         lista cadena = new lista();
         cadena.paraLista(contenido);
         cadena.recorrer();
+        
+        //se crea una lista de arboles
+        listaArbol list = new listaArbol();
+        list.paraListaArbol(cadena);
+        
+        //se crea el arbol
+        list.obtenerArbol();
+        
+        //se crea la Tabla
+        
         return null;
     }
 }
