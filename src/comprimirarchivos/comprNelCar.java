@@ -11,11 +11,11 @@ package comprimirarchivos;
  */
 public class comprNelCar {
 
-    private static String[] comprimir(String contenido) {
+    public String[] comprimir(String contenido) {
         //Se crea una lista para guardar el mensaje
         lista cadena = new lista();
         cadena.paraLista(contenido);
-        
+        cadena.recorrer();
         return null;
     }
 }

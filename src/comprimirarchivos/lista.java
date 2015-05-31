@@ -31,11 +31,11 @@ public class lista {
     //Metodos
     public void paraLista(String contenido) {
         for (int i = 0; i < contenido.length(); i++) {
-            
+            this.agregarAtras(contenido.charAt(i));
         }
     }
     
-    public void agregar(char caracter) {
+    public void agregarAtras(char caracter) {
         nodo nuevo = new nodo(caracter);
         if (inicio == null) {
             inicio = nuevo;
@@ -45,6 +45,18 @@ public class lista {
                 auxiliar = auxiliar.getSiguiente();
             }
             auxiliar.setSiguiente(nuevo);
+        }
+    }
+    
+    public void recorrer(){
+        if(inicio == null){
+            System.out.println("NULL");
+        }else{
+            nodo auxiliar = this.getInicio();
+            while(auxiliar != null){
+                System.out.print(" ** " + auxiliar.getDato());
+                auxiliar = auxiliar.getSiguiente();
+            }
         }
     }
 }

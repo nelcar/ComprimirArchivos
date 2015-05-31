@@ -171,7 +171,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField txtDirection;
     // End of variables declaration//GEN-END:variables
     private File archivoElegido;
-
+    private comprNelCar cnc = new comprNelCar();
+    
     private void compress() {
         JOptionPane.showMessageDialog(this, "Seleccione Donde quiere guardarlo");
         // Creando el objeto FIleChooser para seleccionar el archivo
@@ -200,11 +201,12 @@ public class main extends javax.swing.JFrame {
             String linea;
             String contenido = "";
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
+                //System.out.println(linea);
                 contenido += "\n" + linea;
             }
+            cnc = new comprNelCar();
             System.out.println(contenido);
-            caracterCount(contenido);
+            String[] cadena = cnc.comprimir(contenido);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -216,18 +218,6 @@ public class main extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    private void caracterCount(String texto) {
-        //dividir en caracteres el texto
-        char[] arrayChar = texto.toCharArray();
-        //arreglo cantidad de caracteres segun la tabla ascii
-        int [] count = new int [256];
-        
-        //contar cuanto se repite
-        for (int i = 0; i < arrayChar.length; i++) {
-            count[arrayChar[i]]++;
         }
     }
 }
