@@ -25,8 +25,9 @@ public class listaTabla {
         this.inicio = inicio;
     }
 
-    public nodoTabla sacarInicio() {
+    public nodoTabla sacarInicio() throws Exception {
         if (this.inicio == null) {
+            throw new Exception();
         }
         nodoTabla aux = inicio;
         inicio = aux.getSiguiente();
@@ -44,9 +45,9 @@ public class listaTabla {
         }
     }
 
-    public String unirTodo(String mensaje) {
+    public String unirTodo(String mensaje) throws Exception {
         if (this.getInicio() == null) {
-
+            throw new Exception();
         }
         String todo = "";
         for (int i = 0; i < mensaje.length(); i++) {
@@ -61,5 +62,17 @@ public class listaTabla {
             aux = aux.getSiguiente();
         }
         return aux.getUbicacion();
+    }
+
+    public String LetraDe(String ubicacion) {
+        String letra = null;
+        nodoTabla aux = inicio;
+        while (aux != null && !(aux.getUbicacion().equals(ubicacion))) {
+            aux = aux.getSiguiente();
+        }
+        if (aux != null) {
+            letra = aux.getDato();
+        }
+        return letra;
     }
 }

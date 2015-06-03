@@ -5,7 +5,6 @@
  */
 package TDAarbol;
 
-import TDAarbol.arbol;
 import TDAlist.lista;
 import TDAtabla.listaTabla;
 
@@ -29,9 +28,9 @@ public class listaArbol {
         this.inicio = inicio;
     }
 
-    public void paraListaArbol(lista list) {
+    public void paraListaArbol(lista list) throws Exception {
         if (list.getInicio() == null) {
-
+            throw new Exception();
         } else {
             String caracter = "";
             Integer frecuencia = 0;
@@ -52,7 +51,7 @@ public class listaArbol {
         } else {
             nodoListaArbol aux = inicio;
             nodoListaArbol aux2 = null;
-            while (aux != null && (aux.getTree().getRaiz().getFrecuencia() < nuevo.getTree().getRaiz().getFrecuencia())) {
+            while (aux != null && (aux.getArbol().getRaiz().getFrecuencia() < nuevo.getArbol().getRaiz().getFrecuencia())) {
                 aux2 = aux;
                 aux = aux.getSiguiente();
             }
@@ -68,7 +67,7 @@ public class listaArbol {
         }
     }
 
-    public void obtenerArbol() {
+    public void obtenerArbol() throws Exception {
         nodoArbol uno = null;
         nodoArbol dos = null;
         while (this.inicio.getSiguiente() != null) {
@@ -80,14 +79,14 @@ public class listaArbol {
         }
     }
 
-    public nodoArbol sacarInicio() {
+    public nodoArbol sacarInicio() throws Exception {
         if (this.inicio == null) {
-
+            throw new Exception();
         }
         nodoListaArbol aux = inicio;
         inicio = aux.getSiguiente();
         aux.setSiguiente(null);
-        return aux.getTree().getRaiz();
+        return aux.getArbol().getRaiz();
     }
 
     public listaTabla obtenerHojas(String ubicacion, listaTabla tabla, nodoArbol raiz) {
@@ -99,6 +98,4 @@ public class listaArbol {
         }
         return tabla;
     }
-    
-    
 }

@@ -33,5 +33,4 @@ public class arbol {
         raiz.setIzq(izq);
         raiz.setDer(der);
     }
-
 }

@@ -13,13 +13,6 @@ public class lista {
 
     private nodo inicio;
 
-    public lista() {
-    }
-
-    public lista(nodo inicio) {
-        this.inicio = inicio;
-    }
-
     public nodo getInicio() {
         return inicio;
     }
@@ -28,82 +21,100 @@ public class lista {
         this.inicio = inicio;
     }
 
-    //Metodos
-    public void paraLista(String contenido) {
-        for (int i = 0; i < contenido.length(); i++) {
-            this.agregarAtras(contenido.charAt(i));
+    //constructores
+    public lista() {
+        this.setInicio(null);
+    }
+
+    public void agregar(char valor) {
+        nodo nuevo = new nodo(valor);
+        if (this.getInicio() == null) {
+            this.setInicio(nuevo);
+        } else {
+            nuevo.setSiguiente(inicio);
+            inicio = nuevo;
         }
     }
 
-    public void agregarAtras(char caracter) {
-        nodo nuevo = new nodo(caracter);
+    //Metodos
+    public void toLista(String mensaje) {
+        for (int i = 0; i < mensaje.length(); i++) {
+            this.agregarAtras(mensaje.charAt(i));
+        }
+    }
+
+    public void agregarAtras(char valor) {
+        nodo nuevo = new nodo(valor);
         if (inicio == null) {
             inicio = nuevo;
         } else {
-            nodo auxiliar = inicio;
-            while (auxiliar.getSiguiente() != null) {
-                auxiliar = auxiliar.getSiguiente();
+            nodo aux = inicio;
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
             }
-            auxiliar.setSiguiente(nuevo);
+            aux.setSiguiente(nuevo);
         }
     }
 
     public void recorrer() {
         if (inicio == null) {
-            System.out.println("NULL");
+            System.out.println("NULL.");
         } else {
-            nodo auxiliar = this.getInicio();
-            while (auxiliar != null) {
-                System.out.print(" ** " + auxiliar.getDato());
-                auxiliar = auxiliar.getSiguiente();
+            nodo aux = this.getInicio();
+            System.out.print("Inicio ");
+            while (aux != null) {
+                System.out.print(" -> " + aux.getDato());
+                aux = aux.getSiguiente();
             }
+            System.out.println(" -> NULL");
         }
     }
 
-    public Integer contarIguales(char dato) {
-        nodo auxiliar = inicio;
+    public Integer contarIguales(char dato) throws Exception {
+        nodo aux = inicio;
         Integer contador = 0;
         Integer contador2 = 0;
-        while (auxiliar != null) {
+        while (aux != null) {
             contador2++;
-            if (auxiliar.getDato() == dato) {
+            if (aux.getDato() == dato) {
                 contador++;
-                auxiliar = auxiliar.getSiguiente();
+                aux = aux.getSiguiente();
                 this.eliminar(contador2);
                 contador2--;
             } else {
-                auxiliar = auxiliar.getSiguiente();
+                aux = aux.getSiguiente();
             }
         }
         return contador;
     }
 
-    public void eliminar(int posicion) {
+    public void eliminar(int posicion) throws Exception {
         if (inicio != null) {
             if (posicion > 0) {
-                nodo anterior = null;
-                nodo auxiliar = inicio;
+                nodo ant = null;
+                nodo aux = inicio;
                 int cont = 1;
-                while ((auxiliar != null) && (cont != posicion)) {
+                while ((aux != null) && (cont != posicion)) {
                     cont++;
-                    anterior = auxiliar;
-                    auxiliar = auxiliar.getSiguiente();
+                    ant = aux;
+                    aux = aux.getSiguiente();
                 }
-                if (auxiliar == null) {
-
+                if (aux == null) {
+                    throw new Exception();
                 }
-                if (anterior == null) {
+                if (ant == null) {
                     inicio = inicio.getSiguiente();
-                    auxiliar.setSiguiente(null);
-                    auxiliar = null;
+                    aux.setSiguiente(null);
+                    aux = null;
                 } else {
-                    anterior.setSiguiente(auxiliar.getSiguiente());
-                    auxiliar.setSiguiente(null);
-                    auxiliar = null;
+                    ant.setSiguiente(aux.getSiguiente());
+                    aux.setSiguiente(null);
+                    aux = null;
                 }
+
             }
         } else {
-
+            throw new Exception();
         }
     }
 }

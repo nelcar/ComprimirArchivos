@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package TDAlist;
 
 /**
@@ -11,13 +10,9 @@ package TDAlist;
  * @author Nelson Cardenas
  */
 public class nodo {
+
     private char dato;
     private nodo siguiente;
-
-    public nodo(char dato) {
-        this.dato = dato;
-        this.siguiente = null;
-    }
 
     public char getDato() {
         return dato;
@@ -34,6 +29,9 @@ public class nodo {
     public void setSiguiente(nodo siguiente) {
         this.siguiente = siguiente;
     }
-    
-    
+
+    public nodo(char valor) {
+        this.setDato(valor);
+        this.setSiguiente(null);
+    }
 }

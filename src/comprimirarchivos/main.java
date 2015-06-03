@@ -6,8 +6,11 @@
 package comprimirarchivos;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -38,10 +41,12 @@ public class main extends javax.swing.JFrame {
         txtDirection = new javax.swing.JTextField();
         compressButton = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jButton3 = new javax.swing.JButton();
+        unZip = new javax.swing.JButton();
         txtDirection2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tAContenido = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,11 +66,20 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Descomprimir");
+        unZip.setText("Descomprimir");
+        unZip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unZipActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("From:");
 
         jLabel3.setText("To:");
+
+        tAContenido.setColumns(20);
+        tAContenido.setRows(5);
+        jScrollPane1.setViewportView(tAContenido);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,19 +95,22 @@ public class main extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addComponent(compressButton)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
+                        .addComponent(unZip, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
                 .addGap(43, 43, 43))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDirection2)
-                    .addComponent(txtDirection))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(openFile)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDirection2)
+                            .addComponent(txtDirection))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(openFile)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,10 +130,12 @@ public class main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(compressButton)
-                    .addComponent(jButton3))
+                    .addComponent(unZip))
                 .addGap(18, 18, 18)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,7 +159,48 @@ public class main extends javax.swing.JFrame {
     private void compressButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compressButtonActionPerformed
         // TODO add your handling code here:
         compress();
+        txtDirection2.setText("");
+        txtDirection.setText("");
     }//GEN-LAST:event_compressButtonActionPerformed
+
+    private void unZipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unZipActionPerformed
+        // TODO add your handling code here:
+        comprNelCar algo = new comprNelCar();
+        String codigo = algo.Descomprimir(txtDirection.getText());
+        tAContenido.setText(codigo);
+
+        // Creando el objeto FIleChooser para seleccionar el archivo
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File("./Prueba de proyecto"));
+        // Mostrar Ventana
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int respuesta = fc.showSaveDialog(this);
+
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
+            //Crear un objeto File con el archivo elegido
+            archivoElegido = fc.getSelectedFile();
+            //Mostrar el nombre del archvivo en el campo de texto
+            txtDirection2.setText(archivoElegido.getPath());
+        }
+        try {
+            String nombre = JOptionPane.showInputDialog("Nombre del archivo descomprimido");
+            File f = new File(txtDirection2.getText() + nombre + ".txt");
+            FileWriter w = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(w);
+            PrintWriter escritor = new PrintWriter(bw);
+
+            //Escribimos en el archivo la cadena de caracteres generada
+            escritor.write(codigo + "\n");
+            escritor.close();
+            bw.close();
+            JOptionPane.showMessageDialog(null, "Archivo generado exitosamente!!!\n nombre: " + nombre);
+
+        } catch (Exception e) {
+
+        }
+        txtDirection2.setText("");
+        txtDirection.setText("");
+    }//GEN-LAST:event_unZipActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,18 +239,20 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton compressButton;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton openFile;
+    private javax.swing.JTextArea tAContenido;
     private javax.swing.JTextField txtDirection;
     private javax.swing.JTextField txtDirection2;
+    private javax.swing.JButton unZip;
     // End of variables declaration//GEN-END:variables
     private File archivoElegido;
     private comprNelCar cnc = new comprNelCar();
-    
+
     private void compress() {
         JOptionPane.showMessageDialog(this, "Seleccione Donde quiere guardarlo");
         // Creando el objeto FIleChooser para seleccionar el archivo
@@ -225,11 +287,12 @@ public class main extends javax.swing.JFrame {
             String contenido = "";
             while ((linea = br.readLine()) != null) {
                 //System.out.println(linea);
-                contenido += "\n" + linea;
+                contenido += linea;
             }
             cnc = new comprNelCar();
             System.out.println(contenido);
             String[] cadena = cnc.comprimir(contenido, txtDirection2.getText());
+            tAContenido.setText(cadena[0]);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

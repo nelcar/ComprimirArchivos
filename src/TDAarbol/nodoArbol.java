@@ -16,18 +16,12 @@ public class nodoArbol {
     private nodoArbol izq;
     private nodoArbol der;
 
-    public nodoArbol(String info) {
-        dato = info;
-        frecuencia = 1;
-        izq = null;
-        der = null;
+    public Integer getFrecuencia() {
+        return frecuencia;
     }
 
-    public nodoArbol(String info, Integer num) {
-        dato = info;
-        frecuencia = num;
-        izq = null;
-        der = null;
+    public void setFrecuencia(Integer frecuencia) {
+        this.frecuencia = frecuencia;
     }
 
     public String getDato() {
@@ -36,14 +30,6 @@ public class nodoArbol {
 
     public void setDato(String dato) {
         this.dato = dato;
-    }
-
-    public Integer getFrecuencia() {
-        return frecuencia;
-    }
-
-    public void setFrecuencia(Integer frecuencia) {
-        this.frecuencia = frecuencia;
     }
 
     public nodoArbol getIzq() {
@@ -62,4 +48,17 @@ public class nodoArbol {
         this.der = der;
     }
 
+    public nodoArbol(String d) {
+        dato = d;
+        frecuencia = 1;
+        izq = null;
+        der = null;
+    }
+
+    public nodoArbol(String d, Integer n) {
+        dato = d;
+        frecuencia = n;
+        izq = null;
+        der = null;
+    }
 }
